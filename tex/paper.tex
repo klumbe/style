@@ -1,4 +1,6 @@
-\documentclass[msc,m,palatino,oneside,12pt]{softlang}
+\documentclass[en,msc,m,palatino,oneside,12pt]{softlang}
+
+% Use en(English) or de(German) to change the language of declarations etc.
 
 % Use one of the following terms and replace msc as argument in documentclass:
 % Master of Science thesis: msc
@@ -23,7 +25,7 @@
 \usepackage{biblatex}
 \addbibresource{sources.bib}
 
-% This are optional packages, to use them remove the %:
+% These are optional packages, to use them remove the %:
 \usepackage{booktabs} %for optimicing tabulars
 %\usepackage{bibgerm} % for german BibTex styles
 \usepackage{wrapfig}% for wrapping text arount tables and figures
@@ -38,25 +40,25 @@
 
 % Settings for the listings package, for additional settings refer to the listings package documentation
 \lstset{
-	breaklines=true, % Autozeilenumbruch bei langen Codezeilen
-	breakatwhitespace=true, % Erlaube Zeilenumbruch nur bei Whitespace
-	numbers = left, % Zeilennummern
-	tabsize = 3, % Tabulatorabstand
-	frame = single % Rahmen um Sourcecode listings
+	breaklines=true, 		% Automatically break long code-lines
+	breakatwhitespace=true, % Only allow line breaks on whitespaces
+	numbers = left, 		% Shows line-numbers on the left
+	tabsize = 3, 			% Number of whitespaces used for tabs
+	frame = single 			% Frame around the sourcecode
 	}
 
-% Bestimmt die Tiefe in der die Kapitel nummeriert werden
+% Determines the depth in which sections are numbered
 \setcounter{secnumdepth}{3}
 
-% Bestimmt die Tiefe in der die Kapitel im Inhaltsverzeichnis erscheinen
+% Determines the depth in which sections are numbered inside the table of contents
 \setcounter{tocdepth}{2}
 
 % Set headheight to 15 pt to avoid fancyhdr warning
 \setlength{\headheight}{15pt}
 
-\author{<Name des/r Studierenden>}
-\title{<Titel der Arbeit>}
-\studiengang{<Studiengang>}
+\author{<Name of the Student>}
+\title{<Titel of the paper>}
+\courseofstudies{<Course of studies>}
 
 \makeatletter
 %% Set the metadata for the PDF document and the colors of the internal links.
@@ -75,14 +77,14 @@
 \makeatother
 
 
-\erstgutachter{Prof.\ Dr.\ Ralf Lämmel}
-\erstgutachterInfo{Institut für Informatik}
+\primarysupervisorName{Prof.\ Dr.\ Ralf Lämmel}
+\primarysupervisorInfo{Institut für Informatik}
 
-\zweitgutachter{Msc. Marcel Heinz}
-\zweitgutachterInfo{Institut für Informatik}
+\secondarysupervisorName{Msc. Marcel Heinz}
+\secondarysupervisorInfo{Institut für Informatik}
 
-% \drittgutachter{Hakan Aksu}
-% \drittgutachterInfo{Institut für Informatik}
+% \tertiarysupervisorName{Hakan Aksu}
+% \tertiarysupervisor{Institut für Informatik}
 
 
 %% Beware of widows and orphans.
@@ -102,35 +104,35 @@
 \maketitle
 \cleardoublepage
 
-\input{abstract.tex} % Einfügen des Abstracts
+\input{abstract.tex} % Include abstract
 \cleardoublepage
 
 %\pagestyle{headings}
 \pagestyle{fancy}
 
-\fancyfoot{}% Unten nichts
-%\fancyhead[RE]{\itshape\leftmark}  % Rechts auf geraden Seiten=innen
-%\fancyhead[RO]{\itshape\rightmark} % Links auf ungeraden Seiten=außen
-\fancyhead[R]{\thepage}        % nur rechts
+\fancyfoot{}% No footer
+%\fancyhead[RE]{\itshape\leftmark}  % On the right side of even pages = inner
+%\fancyhead[RO]{\itshape\rightmark} % On the left side of odd pages = outer
+\fancyhead[R]{\thepage}        % Just on the right side
 
 \pagenumbering{roman}
 \tableofcontents
 
 \cleardoublepage
 
-\listoffigures   % fuer ein eventuelles Abbildungsverzeichnis
+\listoffigures   % Can be used to list figures
 \cleardoublepage
 
-% \listoftables % Für ein Tabellenverzeichnis
+% \listoftables % Can be used to list tables
 % \cleardoublepage
 
-% \lstlistoflistings % Für ein Verzeichnis der Listings
+% \lstlistoflistings % Can list listings(code)
 % \cleardoublepage
 
 \pagenumbering{arabic}
 
 
-% Hier kommt jetzt der eigentliche Text der Arbeit
+% Load the actual content of the paper
 \input{content.tex}
 \cleardoublepage
 %\bibliographystyle{alphadin}

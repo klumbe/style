@@ -1,20 +1,21 @@
 %*******************************************************************************
 %  softlang.cls
 %
-%  Latex Dokumentenvorlage der
-%  Arbeitsgruppe Softwaresprachen (Software Languages Team)
+%  Latex template by the
+%  workgroup Software Languages
 %
-%  Dank an Detlev Droege und Matthias Biedermann
+%  Thanks to Detlev Droege and Matthias Biedermann
 %
-%  adaptiert von
-%  templateSE.cls 2006-03-28  v1.0  Philipp Schaer (Erste Version)
-%  cgSA.cls 2006-01-17  v1.2  M. Biedermann (neues FB4-Layout fÃ¼r SA, Einzelarbeit)
-%  2007-06-06 Thomas Lempa (FB4-Layout fÃ¼r SA und DA)
-%  2007-12-21 Michael T. Boos (Erweiterung für Projektpraktikum)
+%  adapted by
+%  templateSE.cls 2006-03-28  v1.0  Philipp Schaer (first version)
+%  cgSA.cls 2006-01-17  v1.2  M. Biedermann (new FB4-layout for SA)
+%  2007-06-06 Thomas Lempa (FB4-layout for SA and DA)
+%  2007-12-21 Michael T. Boos (extension for project internship)
 %  2007-12-21 Michael T. Boos UTF8 changed to latin1
-%  2008-05-14 Nico Jahn (FB-4 Layout für Skripte, Seminararbeiten und DA, SA, BA, MA überarbeitet)
+%  2008-05-14 Nico Jahn (FB-4 Layout for scripts, seminar works and DA, SA, BA, MA revised)
 %  2012-10-30 Michael Ruster back to UTF8, use of hyphens in unknown words put together from two known
-%  2015-12-25 Matthias Paul (Erweiterung für das Software Languages Team)
+%  2015-12-25 Matthias Paul (Expanded for the Software Languages Team)
+%  2017-10-20 Christian Müller (Enabled to switch to English)
 %
 %*******************************************************************************
 
@@ -30,10 +31,10 @@
 \newboolean{@isSem}
 \newboolean{@isProSem}
 \newboolean{@isPP}
-\newboolean{@isSA}
-\newboolean{@isDA}
-\newboolean{@isBA}
-\newboolean{@isMA}
+\newboolean{@isSW}
+\newboolean{@isDT}
+\newboolean{@isBT}
+\newboolean{@isMT}
 \newboolean{@isFemale}
 \newboolean{@isTimes}
 \newboolean{@isPalatino}
@@ -41,6 +42,7 @@
 \newboolean{@isSingle}
 \newboolean{@isOneHalf}
 \newboolean{@isDouble}
+\newboolean{@isEnglish}
 
 %--- Declaration of options ----------------------------------------------------
 
@@ -48,10 +50,10 @@
 \DeclareOption{sem}{\setboolean{@isSem}{true}}
 \DeclareOption{prosem}{\setboolean{@isProSem}{true}}
 \DeclareOption{pp}{\setboolean{@isPP}{true}}
-\DeclareOption{sa}{\setboolean{@isSA}{true}}
-\DeclareOption{diplom}{\setboolean{@isDA}{true}}
-\DeclareOption{msc}{\setboolean{@isMA}{true}}
-\DeclareOption{bsc}{\setboolean{@isBA}{true}}
+\DeclareOption{sa}{\setboolean{@isSW}{true}}
+\DeclareOption{diplom}{\setboolean{@isDT}{true}}
+\DeclareOption{msc}{\setboolean{@isMT}{true}}
+\DeclareOption{bsc}{\setboolean{@isBT}{true}}
 \DeclareOption{w}{\setboolean{@isFemale}{true}}
 \DeclareOption{m}{\setboolean{@isFemale}{false}}
 \DeclareOption{times}{\setboolean{@isTimes}{true}}
@@ -65,6 +67,8 @@
 \DeclareOption{single}{\setboolean{@isSingle}{true}}
 \DeclareOption{onehalf}{\setboolean{@isOneHalf}{true}}
 \DeclareOption{double}{\setboolean{@isDouble}{true}}
+\DeclareOption{de}{\setboolean{@isEnglish}{false}}
+\DeclareOption{en}{\setboolean{@isEnglish}{true}}
 
 %--- Execution of options ------------------------------------------------------
 
@@ -73,20 +77,20 @@
 %--- Package loading -----------------------------------------------------------
 
 \LoadClass[a4paper,titlepage]{book}
-\RequirePackage[ngerman,english]{babel}                       % Unterstuetzung neue deutsche Rechtschreibung
+\RequirePackage[ngerman,english]{babel}               % Support new German spelling
+\RequirePackage[T1]{fontenc}                          % Syllable separation also for words with umlauts
+\RequirePackage[utf8]{inputenc}                       % Support of umlauts and special characters
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}  % Silby separation in unknown composite words
 \RequirePackage{csquotes}                      
-\RequirePackage[T1]{fontenc}                          % Silbentrennung auch bei Worten mit Umlauten
-\RequirePackage[utf8]{inputenc}                       % Unterstuetzung von Umlauten und Sonderzeichen
-\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}  % Silbentrennung bei unbekannten zusammengesetzten Worten
-\RequirePackage{graphicx}                             % fuer Einbindung von Grafiken
-\RequirePackage{graphics}                             % fuer Einbindung von Grafiken
-\RequirePackage{tabularx}                             % flexible Gestaltung von Tabellen
+\RequirePackage{graphicx}                             % For the integration of graphics
+\RequirePackage{graphics}                             % For the integration of graphics
+\RequirePackage{tabularx}                             % Flexible design of tables
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
-\RequirePackage{color}                                % Unterstuetzung für Farben
-\RequirePackage{setspace}                             % Zeilenabstand Ändern
-\RequirePackage{fancyhdr}                             % Schicke Kopfzeilen
+\RequirePackage{color}                                % Support of colors
+\RequirePackage{setspace}                             % Change line spacing
+\RequirePackage{fancyhdr}                             % Fancy headers
 \RequirePackage[colorlinks=true,linkcolor=black, citecolor = black,pdfpagemode = none,urlcolor=blue,pdfstartview=FitH,pdfhighlight={/P}]{hyperref}
 % \RequirePackage{bibgerm}
 
@@ -94,11 +98,11 @@
 % Default: Computer Modern (TeX-Standard)
 
 \ifthenelse{\boolean{@isTimes}}{%
-  \RequirePackage{times}                        % Schriftart Times New Roman
+  \RequirePackage{times}                        % Font Times New Roman
 }{}
 
 \ifthenelse{\boolean{@isPalatino}}{%
-  \RequirePackage{palatino}                     % Schriftart Book Antiqua/Palatino
+  \RequirePackage{palatino}                     % Font Book Antiqua/Palatino
 }{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,37 +111,125 @@
 
 \renewcommand{\contentsname}{T\lowercase{able of} C\lowercase{ontents}}
 
-\def\@studiengang{}
-\newcommand{\studiengang}[1]{\def\@studiengang{#1}}
+\def\@courseofstudies{}
+\newcommand{\courseofstudies}[1]{\def\@courseofstudies{#1}}
 
-\def\@dozent{}
-\newcommand{\dozent}[1]{\def\@dozent{#1}}
+\def\@lecturerName{}
+\newcommand{\lecturerName}[1]{\def\@lecturerName{#1}}
 
-\def\@dozentInfo{}
-\newcommand{\dozentInfo}[1]{\def\@dozentInfo{#1}}
+\def\@lecturerInfo{}
+\newcommand{\lecturerInfo}[1]{\def\@lecturerInfo{#1}}
 
-\def\@erstgutachter{}
-\newcommand{\erstgutachter}[1]{\def\@erstgutachter{#1}}
+\def\@primarysupervisorName{}
+\newcommand{\primarysupervisorName}[1]{\def\@primarysupervisorName{#1}}
 
-\def\@erstgutachterInfo{}
-\newcommand{\erstgutachterInfo}[1]{\def\@erstgutachterInfo{#1}}
+\def\@primarysupervisorInfo{}
+\newcommand{\primarysupervisorInfo}[1]{\def\@primarysupervisorInfo{#1}}
 
-\def\@zweitgutachter{}
-\newcommand{\zweitgutachter}[1]{\def\@zweitgutachter{#1}}
+\def\@secondarysupervisorName{}
+\newcommand{\secondarysupervisorName}[1]{\def\@secondarysupervisorName{#1}}
 
-\def\@zweitgutachterInfo{}
-\newcommand{\zweitgutachterInfo}[1]{\def\@zweitgutachterInfo{#1}}
+\def\@secondarysupervisorInfo{}
+\newcommand{\secondarysupervisorInfo}[1]{\def\@secondarysupervisorInfo{#1}}
 
-\def\@drittgutachter{}
-\newcommand{\drittgutachter}[1]{\def\@drittgutachter{#1}}
+\def\@tertiarysupervisorName{}
+\newcommand{\tertiarysupervisorName}[1]{\def\@tertiarysupervisorName{#1}}
 
-\def\@drittgutachterInfo{}
-\newcommand{\drittgutachterInfo}[1]{\def\@drittgutachterInfo{#1}}
+\def\@tertiarysupervisorInfo{}
+\newcommand{\tertiarysupervisorInfo}[1]{\def\@tertiarysupervisorInfo{#1}}
 
-\newcommand{\abgabe}{%
-  \ifcase\month\or Januar\or Februar\or M{\"a}rz\or April\or Mai\or Juni\or
-  Juli\or August\or September\or Oktober\or November\or Dezember \fi\
-  \number\year }
+\newcommand{\submission}{%
+  \if@isEnglish
+	\ifcase\month
+	\or January
+	\or February
+	\or March
+	\or April
+	\or May
+	\or June
+	\or July
+	\or August
+	\or September
+	\or October
+	\or November
+	\or December
+	\fi
+  \else
+	  \ifcase\month\or Januar\or Februar\or M{\"a}rz\or April\or Mai\or Juni\or
+	  Juli\or August\or September\or Oktober\or November\or Dezember \fi
+  \fi
+  \number \year
+}
+
+%%% Set variables based on language %%%
+\if@isEnglish
+	\newcommand{\seminarwork}{Seminar work}
+	\newcommand{\proseminarpaper}{Proseminar paper}
+	\newcommand{\researchpaper}{Research paper}
+	\newcommand{\projectpractical}{Project practical}
+	\newcommand{\diplomathesis}{Diploma thesis}
+	\newcommand{\obtain}{in order to optain a degree of }
+	\newcommand{\ainformatikerin}{a Diplom-Informatikerin}
+	\newcommand{\ainformatiker}{a Diplom-Informatiker}
+	\newcommand{\bachelorthesis}{Bachelor thesis}
+	\newcommand{\abachelor}{a Bachelor of Science}
+	\newcommand{\masterthesis}{Master thesis}
+	\newcommand{\amaster}{a Master of Science}
+	\newcommand{\incourseofstudies}{in the course of studies }
+	\newcommand{\submittedby}{submitted by}
+	\newcommand{\lecturer}{Lecturer}
+	\newcommand{\supervisor}{Supervisor}
+	\newcommand{\supervisorexpert}{Supervisor}
+	\newcommand{\primarysupervisor}{Primary supervisor}
+	\newcommand{\secondarysupervisor}{Secondary supervisor}
+	\newcommand{\tertiarysupervisor}{Tertiary supervisor}
+	\newcommand{\inX}{in }
+	\newcommand{\declaration}{Declaration}
+	\newcommand{\declarationtext}{I hereby confirm that the present work has been authored by myself, 
+			no other means than those indicated - in particular none in the source list nunnamed internet sources - 
+			have been used and that the work or mine hasn't been used in any other examination procedure before.
+			The submitted written version corresponds to the electronic version (PDF).
+	}
+	\newcommand{\library}{I agree this paper to be listed in the library.}
+	\newcommand{\internet}{I agree with the publication of this paper on the Internet.}
+	\newcommand{\placedate}{Place, date}
+	\newcommand{\yes}{Yes}
+	\newcommand{\no}{No}
+\else
+	\newcommand{\seminarwork}{Seminararbeit}
+	\newcommand{\proseminarpaper}{Proseminararbeit}
+	\newcommand{\researchpaper}{Studienarbeit}
+	\newcommand{\projectpractical}{Projektpraktikum}
+	\newcommand{\diplomathesis}{Diplomarbeit}
+	\newcommand{\obtain}{zur Erlangung des Grades }
+	\newcommand{\ainformatikerin}{einer Diplom-Informatikerin}
+	\newcommand{\ainformatiker}{eines Diplom-Informatikers}
+	\newcommand{\bachelorthesis}{Bachelorarbeit}
+	\newcommand{\abachelor}{eines Bachelor of Science}
+	\newcommand{\masterthesis}{Masterarbeit}
+	\newcommand{\amaster}{eines Master of Science}
+	\newcommand{\incourseofstudies}{im Studiengang }
+	\newcommand{\submittedby}{vorgelegt von}
+	\newcommand{\lecturer}{Dozent}
+	\newcommand{\supervisor}{Betreuer}
+	\newcommand{\supervisorexpert}{Gutachter}
+	\newcommand{\primarysupervisor}{Erstgutachter}
+	\newcommand{\secondarysupervisor}{Zweitgutachter}
+	\newcommand{\tertiarysupervisor}{Betreuer}
+	\newcommand{\inX}{im }
+	\newcommand{\declaration}{Erklärung}
+	\newcommand{\declarationtext}{Hiermit bestätige ich, dass die vorliegende Arbeit von mir selbständig verfasst wurde und ich
+			keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis
+			nicht benannten Internet–Quellen – benutzt habe und die Arbeit von mir vorher nicht in einem
+			anderen Prüfungsverfahren eingereicht wurde. Die eingereichte schriftliche Fassung
+			entspricht der elektronischen Variante (PDF).
+	}
+	\newcommand{\library}{Mit der Einstellung der Arbeit in die Bibliothek bin ich einverstanden.}
+	\newcommand{\internet}{Der Veröffentlichung dieser Arbeit im Internet stimme ich zu.}
+	\newcommand{\placedate}{Ort, Datum}
+	\newcommand{\yes}{Ja}
+	\newcommand{\no}{Nein}
+\fi
 
 %%% save original offsets
 
@@ -152,15 +244,13 @@
 %%% new titlepage
 \renewcommand{\maketitle}{
 
-%%%  Titelseite  %%%
+%%%  Titelpage  %%%
  \setlength{\voffset}{-.5in}
 % \setlength{\hoffset}{+.25in}
  \begin{titlepage}
     % Logo Uni
 		\noindent\includegraphics[height=1.2cm]{logos/UniLogo}
 		\hfill
-		%\includegraphics[height=1.2cm]{logos/IwviLogo}\\
-		%\hspace*{1.867cm}Fachbereich 4: Informatik%
 
 		\normalsize \vspace*{1.5cm}
 
@@ -172,77 +262,86 @@
       \ifthenelse{\boolean{@isScr}}{
         \huge Skript\\[.2cm]}
 
-			\ifthenelse{\boolean{@isSem}}{
-        \huge Seminararbeit\\[.2cm]}
+	  \ifthenelse{\boolean{@isSem}}{
+		\huge \seminarwork\\.[2cm]
+	  }
+	  
+	  \ifthenelse{\boolean{@isProSem}}{
+		\huge \proseminarpaper\\[.2cm]
+	  }
 
-			\ifthenelse{\boolean{@isProSem}}{
-        \huge Proseminararbeit\\[.2cm]}
-
-      \ifthenelse{\boolean{@isSA}}{
-        \huge Studienarbeit\\[.2cm]}
+      \ifthenelse{\boolean{@isSW}}{
+		\huge \researchpaper\\[.2cm]
+	  }
 
       \ifthenelse{\boolean{@isPP}}{
-        \huge Projektpraktikum\\[.2cm]}
+		\huge \projectpractical\\[.2cm]
+	  }
 
-      \ifthenelse{\boolean{@isDA}}{%
-          \huge Diplomarbeit\\[.2cm]
-          \normalsize zur Erlangung des Grades eine%
-          \ifthenelse{\boolean{@isFemale}}{%
-            r Diplom-Informatikerin\\}{%
-            s Diplom-Informatikers\\}}
+      \ifthenelse{\boolean{@isDT}}{%
+		  \huge \diplomathesis\\[.2cm]
+		  \normalsize \obtain~%
+		  \ifthenelse{\boolean{@isFemale}}{%
+            \ainformatikerin\\}{%
+            \ainformatiker\\}
+	  }
 
-      \ifthenelse{\boolean{@isBA}}{
-          \huge Bachelorarbeit\\[.2cm]
-          \normalsize zur Erlangung des Grades eines
-          Bachelor of Science\\}
+      \ifthenelse{\boolean{@isBT}}{
+		  \huge \bachelorthesis\\[.2cm]
+		  \normalsize \obtain \abachelor\\
+	  }
 
-      \ifthenelse{\boolean{@isMA}}{
-          \huge Masterarbeit\\[.2cm]
-          \normalsize zur Erlangung des Grades eines
-          Master of Science\\}
+      \ifthenelse{\boolean{@isMT}}{
+		  \huge \masterthesis\\[.2cm]
+		  \normalsize \obtain \amaster\\
+	  }
 
-      \ifthenelse{\equal{\@studiengang}{}}{}{
-        \normalsize im Studiengang \@studiengang \\[0.75cm]}
+      \ifthenelse{\equal{\@courseofstudies}{}}{}{
+		\normalsize \incourseofstudies \@courseofstudies \\[.75cm]
+	  }
 
-      \normalsize vorgelegt von\\[1ex]\Large\@author \\[2.3cm]
+	  \normalsize \submittedby\\[1ex]\Large\@author \\[2.3cm]
     \end{center}
 
       \normalsize {
 
       \ifthenelse{\boolean{@isScr}}{
         	\begin{tabularx}{\linewidth}{l X}
-            Dozent  :     & \@dozent \\
-                          & \@dozentInfo \\[.2cm]
-          \end{tabularx}\\[2cm]}{
+				\lecturer :
+						  & \@lecturerName \\
+						  & \@lecturerInfo \\[.2cm]
+			\end{tabularx}\\[2cm]}{
 
-        \ifthenelse{\boolean{@isProSem}\or\boolean{@isSem}\or\boolean{@isSA}\or\boolean{@isPP}}{%
+        \ifthenelse{\boolean{@isProSem}\or\boolean{@isSem}\or\boolean{@isSW}\or\boolean{@isPP}}{%
           %% if isSA or isPP or isSem
           \begin{tabularx}{\linewidth}{l X}
-            Betreuer:     & \@erstgutachter \\
-                          & \@erstgutachterInfo \\[.2cm]
-                          & \@zweitgutachter \\
-                          & \@zweitgutachterInfo \\[.2cm]
-			\ifthenelse{\NOT\equal{\@drittgutachter}{}}{
-						  & \@drittgutachter \\
-                          & \@drittgutachterInfo \\[.2cm]}{}
+				\supervisor :
+						  & \@primarysupervisorName \\
+                          & \@primarysupervisorInfo \\[.2cm]
+                          & \@secondarysupervisorName \\
+                          & \@secondarysupervisorInfo \\[.2cm]
+			\ifthenelse{\NOT\equal{\@tertiarysupervisor}{}}{
+						  & \@tertiarysupervisorName \\
+                          & \@tertiarysupervisorInfo \\[.2cm]}{}
           \end{tabularx}\\[2cm]}{%
 		  
-          % \begin{tabularx}{\linewidth}{r  X}
           \begin{tabularx}{1.05\textwidth}{r X} %{ >{\hsize=.24\hsize}X >{\hsize=0.76\hsize}X}
-            \ifthenelse{\equal{\@zweitgutachter}{}}{
-            Gutachter:			& \@erstgutachter \\
-								& \@erstgutachterInfo \\}{
-            Erstgutachter:  	& \@erstgutachter \\
-								& \@erstgutachterInfo \\[.2cm]
-            Zweitgutachter: 	& \@zweitgutachter \\
-								& \@zweitgutachterInfo \\[.2cm]
-			\ifthenelse{\NOT\equal{\@drittgutachter}{}}{
-            Betreuer:			& \@drittgutachter \\
-								& \@drittgutachterInfo \\[.2cm]}{}
+            \ifthenelse{\equal{\@secondarysupervisorName}{}}{
+			\supervisorexpert :
+										& \@primarysupervisorName \\
+										& \@primarysupervisorInfo \\}{
+								
+            \primarysupervisor :  		& \@primarysupervisorName \\
+										& \@primarysupervisorInfo \\[.2cm]
+            \secondarysupervisor : 		& \@secondarysupervisorName \\
+										& \@secondarysupervisorInfo \\[.2cm]
+			\ifthenelse{\NOT\equal{\@tertiarysupervisorName}{}}{
+            \tertiarysupervisor :		& \@tertiarysupervisorName \\
+										& \@tertiarysupervisorInfo \\[.2cm]}{}
 			}
           \end{tabularx}\\[2cm]}}
       }
-      \normalsize \hspace*{.12cm} Koblenz, im \abgabe
+      \normalsize \hspace*{.12cm} Koblenz, \inX \submission
 
     \end{titlepage}
 
@@ -253,29 +352,25 @@
 
     \cleardoublepage
 
-		\ifthenelse{\boolean{@isBA}\or\boolean{@isMA}\or\boolean{@isDA}}{
+		\ifthenelse{\boolean{@isBT}\or\boolean{@isMT}\or\boolean{@isDT}}{
 			
 			\huge
-			\textbf{Erklärung}
+			\textbf{\declaration}
 			\normalsize
 		    \newline\newline\newline\newline\newline\newline
   		  \thispagestyle{empty}
 	    	\noindent
-    		Hiermit bestätige ich, dass die vorliegende Arbeit von mir selbständig verfasst wurde und ich
-			keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis
-			nicht benannten Internet–Quellen – benutzt habe und die Arbeit von mir vorher nicht in einem
-			anderen Prüfungsverfahren eingereicht wurde. Die eingereichte schriftliche Fassung
-			entspricht der auf dem elektronischen Speichermedium (CD-Rom).\\
+				\declarationtext\\
     		\vspace*{2ex}
 
     		\begin{flushleft}
       		\begin{tabularx}{\linewidth}{X c c}
 
-        	{} & Ja & Nein \\
+        	{} & \yes & \no \\
         	{} & {} & {} \\
-        	Mit der Einstellung der Arbeit in die Bibliothek bin ich einverstanden. & $\square$ & $\square$ \\
+        	\library & $\square$ & $\square$ \\
         	{} & {} & {} \\
-        	Der Veröffentlichung dieser Arbeit im Internet stimme ich zu. &
+        	\internet &
         	$\square$ & $\square$
 
       		\end{tabularx}
@@ -286,8 +381,10 @@
     		\small
     		\noindent
     		\dotfill \\
-    		{\small(Ort, Datum)}\hfill{\small (\@author)}
-		}{}% Unterschiedliche Zeilenabstaende
+    		{\small(\placedate)}\hfill{\small (\@author)}
+		}{}
+		
+% Different line spacings
 
 \ifthenelse{\boolean{@isSingle}} {
     \singlespacing
